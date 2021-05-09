@@ -84,19 +84,17 @@ void sort(iterator *start, iterator *end)
 
 void **max_element(iterator *start, iterator *end)
 {
-    int max_ele = INT_MIN;
-    int *result;
+    void **max = (start->ptr_vtable->element(start));
 
-    for (; !(start->ptr_vtable->is_end(start)); start->ptr_vtable->next(start))
+    for(;!(start->ptr_vtable->is_end(start)); start->ptr_vtable->next(start))
     {
-        if (*(start->ptr_vtable->element(start)) > max_ele)
+        if(*(start->ptr_vtable->element(start)) > *max)
         {
-            result = start->ptr_vtable->element(start);
-            max_ele = *(start->ptr_vtable->element(start));
+            max = (start->ptr_vtable->element(start));
         }
     }
     start->ptr_vtable->reset(start);
-    return result;
+    return max;
 }
 
 void print_container(iterator *start, iterator *end)
