@@ -1,0 +1,103 @@
+-->To run the list client we run the makefile for list.
+    Command to run: make -f make_list.mk
+
+-->To run the vector client we run the shell script for vector.
+    Command to run: ./run_vector.sh 
+
+-->This project is an implementation of List and Vector STL containers in C using OOP Design Patterns. It contains implementation of iterators and generic algorithms for the same.
+
+-->The Design patterns that are used in this project are OOP in C and Iterators. 
+OOP in C is used to implement all the major components of this project. Iterators are used in generic algorithms that have been developed.
+
+-->The link to our repository: https://github.com/theradtad/List-vector-in-C
+
+-->List is implemented as a doubly linked list. Multiple nodes make up a linked list. Each list contains a vtable pointer that points to an object containing all the functions.
+It also contains a head pointer that points to the first node of the doubly linked list,a tail pointer that points to the last node of the doubly linked list, 
+an integer member called sz that holds the size.
+
+-->The following are the functions that are present in the list_vtable structure and can be accessed by objects of list.
+    void *front(const list *ptr_list) -  Returns the element stored at the head - the first element in the list.
+    void *back(const list *ptr_list) -  Returns the element stored at the tail - the last element in the list.
+    void push_front(list *ptr_list,void *g) -  Adds an element to the front of the list.
+    void push_back(list *ptr_list,void *g) -  Adds an element to the end of the list.
+    void pop_front(list *ptr_list) -  Deletes the first element of the list.
+    void pop_back(list *ptr_list) -  Deletes the last element of the list.
+    bool empty(const list *ptr_list) -  Returns True if the list is empty, False if the list contains elements.
+    void insert(list *ptr_list, iterator_list iter_ptr,int num_ele, void *ele) -  Called on an iterator, if it's called on begin() add before element, if called on end() add after element.
+    void erase(list *ptr_list, iterator_list iter_ptr) -  Erases all the elements that occur after the current position of the iterator, including the element to which the iterator points to.
+    void assign(list *ptr_list, int count, void *value) -    On calling this function, this list would contain a count number of elements, with the value that is passed as argument to the function.
+    void remove(list *ptr_list,void *value) -  Deletes all the elements in the list that have value equal to the argument passed.
+    void remove_if(list *ptr_list, bool (*fn)(void *value)) -  Deletes all elements in the list, which, when passed to the function specified in the argument returns true.
+    void reverse(list *ptr_list) -  Reverse the linked list and hence reverses the elements present in the linked list.
+    int size(const list *ptr_list) -  Returns the size of the linked list, which represents the number of elements present in the list.
+    void resize(list *ptr_list, int count, void *value) -  Resizes the list to contain exactly count number of elements with all of them having the value passed the argument.
+    void sort(list *ptr_list) -  Sorts the list with the time complexity O(n*n).
+    void clear(list *ptr_list) -  Clears the list so that it contains no elements.
+    void unique(list *ptr_list) -  Deletes all duplicate elements in a sorted list.
+    void swap(list *ptr_list,list *ptr_list2) -  Swaps the content of two lists of the same size.
+    void emplace_front(list *ptr_list,void *g) -  Adds an element to the front of the list.
+    void emplace_back(list *ptr_list,void *g) -  Adds an element to the end of the list.
+    void merge(list *ptr_list,list *ptr_list2) -  Merges contents of two sorted lists into the list calling the function and the other list is empty.
+    void splice(list *ptr_list, iterator_list iter_ptr, list *ptr_list2) -   Transfers all elements of the second list to the first, after the position pointed to by the iterator_list object.
+    iterator_list* emplace(list *ptr_list, iterator_list iter_ptr, void *ele) -  Inserts a new element at the position pointed to by the iterator_list object
+    iterator_list* begin(list *ptr_list) -  Returns an iterator object, pointing to the first element of the list.
+    iterator_list* end(list *ptr_list) -    Returns an iterator object, pointing to the last element of the list.
+    iterator_list* rbegin(list *ptr_list) -  Returns a reverse iterator object, pointing to the first element of the list.
+    iterator_list* rend(list *ptr_list) -  Returns a reverse iterator object, pointing to the last element of the list.
+
+
+-->Vectors are dynamic containers with the ability to resize when an element is added or deleted.We have implemented a vector 
+that can take any data type and also have implemented all the basic functions of the STL vector. 
+Each object of vector has the following fields - arr which is a pointer to an array of void* pointers that point to the elements, sz which is the size of the vector,
+cap which is the capacity of the vector, a ptr_vtable pointer to the vtable structure that has function pointers.
+
+-->The following are the functions that are present in the vector_vtable structure and can be accessed by objects of vector.
+    int (*size)(vector *ptr_vect) - returns the size of the vector
+    int (*capacity)(vector *ptr_vect)- returns the capacity of the vector
+    void (*resize)(vector *ptr_vect, int n, void *val) - resizes the vector to a new size with a specific value as each element.
+    bool (*empty)(vector *ptr_vect) - returns 1 if vector is empty and 0 if not empty
+    void (*shrink_to_fit)(vector *ptr_vect) - shrinks the vector capacity to vector size.
+    void (*assign)(vector *ptr_vect, int sz, void *value) - assigns the vector with specific value and size.
+    void (*push_back)(vector *ptr_vect, void *g) - pushes an element to the end of the vector
+    void (*pop_back)(vector *ptr_vect) - pops an element from the end of the vector.
+    void (*insert)(vector *ptr_vect, iterator_vector ptr_iter, void *val) - inserts an element to the position pointed to by an iterator.
+    void (*erase)(vector *ptr_vect, iterator_vector ptr_iter) - removes an element from position pointed to by iterator from the vector.
+    void (*clear)(vector *ptr_vect) - clears the vector.
+    void (*swap)(vector *ptr_vect1, vector *ptr_vect2) - swaps 2 vectors.
+    void **(*at)(vector *ptr_vect, int position) - returns address of element at position specified by the position parameter.
+    void **(*front)(vector *ptr_vect) - returns address of first element of vector.
+    void **(*back)(vector *ptr_vect) - returns address of last element of vector.
+    void **(*data)(vector *ptr_vect) - returns the pointer to the internal array used to store elements for the vector.
+    iterator_vector (*emplace)(vector *ptr_vect, iterator_vector ptr_iter, void *element) - adds an element to the position specified by an iterator and returns the iterator that points to the new element.
+    void (*emplace_back)(vector *ptr_vect, void *element) - adds an element to the end of the vector.
+    iterator_vector *(*begin)(vector *ptr_vect) - returns an iterator that points to front of vector
+    iterator_vector *(*end)(vector *ptr_vect) - returns an iterator that points to the end of the vector.
+    iterator_vector *(*rbegin)(vector *ptr_vect) - returns a reverse iterator that points to end of vector
+    iterator_vector *(*rend)(vector *ptr_vect) - returns a reverse iterator that points to the front of the vector.
+
+-->Iterators are used to traverse the list. The design pattern OOP in C, is used. The base structure is called iterator. The two derived structures are iterator_vector and iterator_list. All of these objects contain the same functions which are listed later.
+Each iterator(base) object contains a vtable pointer that points to a vtable object, a character variable called type_of_movement that is used to identify if the iterator is a begin 
+pointer or an end pointer, a character variable called type which is used to identify if the iterator is a forward iterator or a reverse iterator.
+Each derived iterator object contains a vtable pointer that points to a vtable object, an index member which is of type node* for iterator_list and an integer for iterator_vector,
+a pointer to the list object in case of iterator_list or to a vector object in case of iterator_vector. 
+
+-->The following are the functions that are present in the iterator structure and its derived structures which are iterator_list and iterator_vector
+    void **element(iterator *iter_ptr) - Returns the address of the current element to which the index points to.
+    void next(iterator *iter_ptr) - Moves the index pointer to the next element in the list / increases the value of index by 1 in case of vector.
+    void prev(iterator *iter_ptr) - Moves the index pointer to the previous element in the list / decreases the value of index by 1 in case of vector.
+    bool is_begin(iterator *iter_ptr) - Checks if the index is < 0 which would indicate the index is before the first element in case of vector / Checks if the index is NULL which would indicate the index is before the first element in case of list.
+    bool is_end(iterator *iter_ptr) - Checks if the index is >= vector size which would indicate that its the end of the vector / Checks if the index is NULL which would indicate the index is before the first element in case of list.
+    bool compare(iterator *iter_ptr1, iterator *iter_ptr2) - Compares two vectors using 2 iterator objects, comparison works only if both iterator_list objects are forward iterators or both are reverse iterators.
+    void reset(iterator *iter_ptr) - Resets the index pointer to the initial element that it was pointing to before next or prev was called on it.
+
+-->Generic algorithms here are algorithms that operate on any type of container through the use of iterators to the containers.
+
+-->The following generic algorithms were implemented that can operate on both list and vector through the use of iterators.
+    void reverse(iterator *start, iterator *end) - reverses the container elements.
+    int *min_element(iterator *start, iterator *end) - returns the address of the smallest element
+    int *max_element(iterator *start, iterator *end) - returns the address of the largest element.
+    int count(iterator *start, iterator *end, int x) - returns the count of an element in the container.
+    void sort(iterator *start, iterator *end) - sorts the container elements
+    int accumulate(iterator *start, iterator *end, int initial_sum) - adds the vector elements to an initial_sum that can be passed to the function
+    void replace(iterator *start, iterator *end, int old_value, int new_value) - replaces every occurrence of an element by another element.
+    bool equal(iterator *start1, iterator *end1, iterator *start2) - checks if 2 ranges of elements are equal or not.
