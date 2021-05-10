@@ -16,35 +16,35 @@ void display_list(list *ptr_list)
 
 int main()
 {
-    list l1;
-    init_list(&l1);
+    list *l1 = (list *)malloc(sizeof(list));
+    init_list(l1);
 
-    if(l1.ptr_vtable->empty(&l1))
+    if(l1->ptr_vtable->empty(l1))
     {
         printf("The list is empty \n");
     }
 
     for(int i=0;i<5;++i)
     {
-        l1.ptr_vtable->push_back(&l1,i);
+        l1->ptr_vtable->push_back(l1,i);
     }
 
-    printf("Element at the front of the list is: %d \n",l1.ptr_vtable->front(&l1));
-    printf("Element at the back of the list is: %d \n",l1.ptr_vtable->back(&l1));
-    printf("The size of the list is: %d\n\n",l1.ptr_vtable->size(&l1));
+    printf("Element at the front of the list is: %d \n",l1->ptr_vtable->front(l1));
+    printf("Element at the back of the list is: %d \n",l1->ptr_vtable->back(l1));
+    printf("The size of the list is: %d\n\n",l1->ptr_vtable->size(l1));
 
-    l1.ptr_vtable->insert(&l1,*(l1.ptr_vtable->begin(&l1)),3,6);
+    l1->ptr_vtable->insert(l1,*(l1->ptr_vtable->begin(l1)),3,6);
 
     printf("The contents of the list are: ");
-    display_list(&l1);
+    display_list(l1);
 
-    sort((iterator *)l1.ptr_vtable->begin(&l1),(iterator *)l1.ptr_vtable->end(&l1));
+    sort((iterator *)l1->ptr_vtable->begin(l1),(iterator *)l1->ptr_vtable->end(l1));
 
     printf("The contents of the list after sorting are: ");
-    display_list(&l1);
+    display_list(l1);
 
-    iterator *it1 = (iterator *)l1.ptr_vtable->begin(&l1);
-    iterator *it2 = (iterator *)l1.ptr_vtable->end(&l1);
+    iterator *it1 = (iterator *)l1->ptr_vtable->begin(l1);
+    iterator *it2 = (iterator *)l1->ptr_vtable->end(l1);
 
     reverse(it1,it2);
     
@@ -55,14 +55,16 @@ int main()
     }
     printf("\n");
 
-    printf("Number of occurences of 6 in the list: %d \n",count((iterator *)l1.ptr_vtable->begin(&l1),(iterator *)l1.ptr_vtable->end(&l1),6));
-    printf("The minimum element in the list is: %d \n",*min_element((iterator *)l1.ptr_vtable->begin(&l1),(iterator *)l1.ptr_vtable->end(&l1)));
+    printf("Number of occurences of 6 in the list: %d \n",count((iterator *)l1->ptr_vtable->begin(l1),(iterator *)l1->ptr_vtable->end(l1),6));
+    printf("The minimum element in the list is: %d \n",*min_element((iterator *)l1->ptr_vtable->begin(l1),(iterator *)l1->ptr_vtable->end(l1)));
 
-    l1.ptr_vtable->remove(&l1,6);
+    l1->ptr_vtable->remove(l1,6);
 
     printf("The contents of the list after removing all occurences of 6 are: ");
-    display_list(&l1);
+    display_list(l1);
 
-    l1.ptr_vtable->clear(&l1);
-    printf("The size of the list after clearing is: %d\n\n",l1.ptr_vtable->size(&l1));
+    // l1->ptr_vtable->clear(l1);
+    // printf("The size of the list after clearing is: %d\n\n",l1->ptr_vtable->size(l1));
+    atexit(clean_resources);
+    atexit(clean_resource_list);
 }

@@ -304,6 +304,30 @@ void init_vector_vtable(vector_vtable *ptr_vtable)
     ptr_vtable->rend = rend;
 }
 
+vector **resources_vector;
+int vector_resource_num = 0;
+
+void add_resource_vector(vector *ptr_vect)
+{
+    resources_vector = realloc(resources_vector, sizeof(vector *) * (vector_resource_num + 1));
+    resources_vector[vector_resource_num++] = ptr_vect;
+}
+
+void clean_resource_vector()
+{
+    for(int i=0;i < vector_resource_num; ++i)
+    {
+        if(resources_vector[i]->arr != NULL)
+        {
+            free(resources_vector[i]->arr);
+            free(resources_vector[i]);
+        }
+    }
+    free(resources_vector);
+    vector_resource_num = 0;
+}
+
+
 //initializes the vector
 void init_vector(vector *ptr_vect)
 {
@@ -312,4 +336,5 @@ void init_vector(vector *ptr_vect)
     ptr_vect->cap = 0;
     ptr_vect->ptr_vtable = &vector_vtbl;
     init_vector_vtable(&vector_vtbl);
+    add_resource_vector(ptr_vect);
 }

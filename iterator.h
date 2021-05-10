@@ -28,5 +28,8 @@ struct iterator_vtable
 };
 
 void init_base_iterator(iterator *iter_ptr, char type, char type_of_movement);
+void add_resource(iterator *iter_ptr);
+void clean_resources();
+
 
 #endif

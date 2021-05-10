@@ -107,6 +107,7 @@ void init_iterator_list_fwd(iterator_list* iter_ptr, list *ptr_container, char c
     }
     iter_ptr->ptr_vtable = &iter_list_vtbl_fwd;
     iter_ptr->ptr_container = ptr_container;
+    add_resource((iterator *)iter_ptr);
 }
 
 // used to initialize the reverse iterator in list.
@@ -124,4 +125,5 @@ void init_iterator_list_rev(iterator_list* iter_ptr, list *ptr_container, char c
     }
     iter_ptr->ptr_vtable = &iter_list_vtbl_rev;
     iter_ptr->ptr_container = ptr_container;
+    add_resource((iterator *)iter_ptr);
 }

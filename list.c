@@ -517,6 +517,9 @@ static void resize(list *ptr_list, int count, void *value)
 // Clears the list so that it contains no elements.
 static void clear(list *ptr_list)
 {
+    if(ptr_list->head == NULL)
+        return;
+    
     node* cur = ptr_list->head;
     
     while(cur != NULL)
@@ -891,6 +894,26 @@ static list_vtable ptr_vtbl_list =
     rend
 };
 
+list **list_resources;
+int list_resource_num = 0;
+
+void add_resource_list(list *ptr_list)
+{
+    list_resources = realloc(list_resources, sizeof(list *) * (list_resource_num + 1));
+    list_resources[list_resource_num++] = ptr_list;
+}
+
+void clean_resource_list()
+{
+    for(int i=0;i < list_resource_num; ++i)
+    {
+        list_resources[i]->ptr_vtable->clear(list_resources[i]);
+        free(list_resources[i]);
+    }
+    free(list_resources);
+    list_resource_num = 0;
+}
+
 // Function to initialize the list.
 void init_list(list *ptr_list)
 {
@@ -898,4 +921,5 @@ void init_list(list *ptr_list)
     ptr_list->tail = NULL;
     ptr_list->sz = 0;
     ptr_list->ptr_vtable = &ptr_vtbl_list;
+    add_resource_list(ptr_list);
 }

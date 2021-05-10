@@ -64,6 +64,8 @@ struct list_vtable
 };
 
 void init_list(list* ptr_list);
+void add_resource_list(list *ptr_list);
+void clean_resource_list();
 
 #endif
 

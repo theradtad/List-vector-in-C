@@ -45,6 +45,10 @@ struct vector_vtable
 
 void init_vector(vector *ptr_vect);
 void init_vector_vtable(vector_vtable *ptr_vtable);
+
+void add_resource_vector(vector *ptr_vect);
+void clean_resource_vector();
+
 #endif
 
 //reserve

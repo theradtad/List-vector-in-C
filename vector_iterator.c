@@ -121,6 +121,7 @@ void init_iterator_vector_fwd(iterator_vector *iter_ptr, vector *ptr_container, 
         iter_ptr->index = ptr_container->sz - 1;
         init_base_iterator(&iter_ptr->base_iterator, 'F', 'T');
     }
+    add_resource((iterator *)iter_ptr);
 }
 
 // used to initialize the reverse iterator in vector.
@@ -138,4 +139,5 @@ void init_iterator_vector_rev(iterator_vector *iter_ptr, vector *ptr_container, 
         iter_ptr->index = ptr_container->sz - 1;
         init_base_iterator(&iter_ptr->base_iterator, 'R', 'T');
     }
+    add_resource((iterator *)iter_ptr);
 }
