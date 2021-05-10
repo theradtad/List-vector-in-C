@@ -829,7 +829,7 @@ static iterator_list* emplace(list *ptr_list, iterator_list iter_ptr, void *ele)
     }
 }
 
-// Returns a forward pointer, pointing to the first element of the list.
+// Returns a iterator object, pointing to the first element of the list.
 static iterator_list* begin(list *ptr_list)
 {
     iterator_list *temp = (iterator_list*)malloc(sizeof(iterator_list));
@@ -837,7 +837,7 @@ static iterator_list* begin(list *ptr_list)
     return temp;
 }
 
-// Returns a forward pointer, pointing to the last element of the list.
+// Returns a iterator object, pointing to the last element of the list.
 static iterator_list* end(list *ptr_list)
 {
     iterator_list *temp = (iterator_list*)malloc(sizeof(iterator_list));
@@ -845,7 +845,7 @@ static iterator_list* end(list *ptr_list)
     return temp;
 }
 
-// Returns a reverse pointer, pointing to the first element of the list.
+// Returns a reverse iterator object, pointing to the first element of the list.
 static iterator_list* rbegin(list *ptr_list)
 {
     iterator_list *temp = (iterator_list*)malloc(sizeof(iterator_list));
@@ -853,7 +853,7 @@ static iterator_list* rbegin(list *ptr_list)
     return temp;
 }
 
-// Returns a reverse pointer, pointing to the last element of the list.
+// Returns a reverse iterator object, pointing to the last element of the list.
 static iterator_list* rend(list *ptr_list)
 {
     iterator_list *temp = (iterator_list*)malloc(sizeof(iterator_list));
